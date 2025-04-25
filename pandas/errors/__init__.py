@@ -903,6 +903,11 @@ class InvalidComparison(Exception):
     This is an internal error.
     """
 
+class InvalidValueArgument(Exception):
+    """
+    Exception raised by an argument with the right type but an invalid value.
+    Please read the documentation to better understanding of the range of the argument.
+    """
 
 __all__ = [
     "AbstractMethodError",
@@ -944,4 +949,5 @@ __all__ = [
     "UnsortedIndexError",
     "UnsupportedFunctionCall",
     "ValueLabelTypeMismatch",
+    "InvalidValueArgument",
 ]
