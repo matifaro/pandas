@@ -903,7 +903,7 @@ class InvalidComparison(Exception):
     This is an internal error.
     """
 
-class InvalidValueArgument(Exception):
+class InvalidValueArgument(ValueError):
     """
     Exception raised by an argument with the right type but an invalid value.
     Please read the documentation to better understanding of the range of the argument.

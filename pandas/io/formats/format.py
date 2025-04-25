@@ -85,6 +85,8 @@ from pandas.io.common import (
 )
 from pandas.io.formats import printing
 
+from pandas.errors import InvalidValueArgument
+
 if TYPE_CHECKING:
     from pandas._typing import (
         ArrayLike,
@@ -1734,6 +1736,8 @@ def _make_fixed_width(
         max_len = max(minimum, max_len)
 
     conf_max = get_option("display.max_colwidth")
+    if conf_max < 4:
+        raise InvalidValueArgument
     if conf_max is not None and max_len > conf_max:
         max_len = conf_max
 
