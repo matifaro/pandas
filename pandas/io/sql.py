@@ -826,6 +826,10 @@ def to_sql(
     `sqlite3 <https://docs.python.org/3/library/sqlite3.html#sqlite3.Cursor.rowcount>`__ or
     `SQLAlchemy <https://docs.sqlalchemy.org/en/14/core/connections.html#sqlalchemy.engine.BaseCursorResult.rowcount>`__
     """  # noqa: E501
+
+    if hasattr(con, "connect") and not hasattr(con, "cursor"):
+        con = con.connect()
+    
     if if_exists not in ("fail", "replace", "append", "delete_rows"):
         raise ValueError(f"'{if_exists}' is not valid for if_exists")
 
