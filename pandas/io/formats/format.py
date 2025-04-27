@@ -1737,7 +1737,7 @@ def _make_fixed_width (
 
     conf_max = get_option("display.max_colwidth")
     if conf_max < 4:
-        raise InvalidValueArgument
+        return InvalidValueArgument
     if conf_max is not None and max_len > conf_max:
         max_len = conf_max
 
