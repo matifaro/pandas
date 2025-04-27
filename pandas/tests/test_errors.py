@@ -41,6 +41,7 @@ import pandas as pd
         "UnsortedIndexError",
         "UnsupportedFunctionCall",
         "ValueLabelTypeMismatch",
+        "InvalidValueArgument",
     ],
 )
 def test_exception_importable(exc):

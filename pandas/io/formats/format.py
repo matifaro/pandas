@@ -1716,7 +1716,7 @@ def get_format_timedelta64(
     return _formatter
 
 
-def _make_fixed_width(
+def _make_fixed_width (
     strings: list[str],
     justify: str = "right",
     minimum: int | None = None,

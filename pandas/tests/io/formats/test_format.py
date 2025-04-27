@@ -30,7 +30,7 @@ from pandas import (
 
 from pandas.io.formats import printing
 import pandas.io.formats.format as fmt
-
+from pandas.errors import InvalidValueArgument
 
 def has_info_repr(df):
     r = repr(df)
@@ -122,6 +122,10 @@ class TestDataFrameFormatting:
 
         with option_context("display.max_colwidth", max_len + 2):
             assert "..." not in repr(df)
+        with pytest.raises(InvalidValueArgument) as excinfo:  
+            option_context("display.max_colwidth", 2)  
+        assert str(excinfo.value) == """ Exception raised by an argument with the right type but an invalid value.
+                                         Please read the documentation to better understanding of the range of the argument."""
 
     def test_repr_truncation_preserves_na(self):
         # https://github.com/pandas-dev/pandas/issues/55630
