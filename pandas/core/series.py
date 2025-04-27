@@ -2513,6 +2513,9 @@ class Series(base.IndexOpsMixin, NDFrame):  # type: ignore[misc]
         4    3.0
         dtype: float64
         """
+        if self.dtype.kind == "O":
+            raise TypeError(f"Cannot round Series with dtype {self.dtype}")
+
         nv.validate_round(args, kwargs)
         new_mgr = self._mgr.round(decimals=decimals)
         return self._constructor_from_mgr(new_mgr, axes=new_mgr.axes).__finalize__(

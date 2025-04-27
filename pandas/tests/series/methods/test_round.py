@@ -72,3 +72,8 @@ class TestSeriesRound:
         tm.assert_series_equal(result, expected)
         result.iloc[0] = False
         tm.assert_series_equal(ser, expected)
+
+    def test_round_object_typeerror(self):
+        df = pd.DataFrame({"a": ["foo", 1.23]})
+        with pytest.raises(TypeError):
+            df["a"].round()
