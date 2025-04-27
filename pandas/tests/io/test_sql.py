@@ -1091,6 +1091,16 @@ def test_to_sql_exist_fail(conn, test_frame1, request):
         with pytest.raises(ValueError, match=msg):
             pandasSQL.to_sql(test_frame1, "test_frame", if_exists="fail")
 
+def test_to_sql_sqlalchemy_engine():
+    engine = create_engine('sqlite:///:memory:')
+    test_table_name = 'test_table'
+    test_df = pd.DataFrame({
+        'id': [1, 2, 3],
+        'name': ['Alice', 'Bob', 'Charlie']
+    })
+    test_df.to_sql(test_table_name, con=engine, if_exists='replace', index=False)
+    result = pd.read_sql_table(test_table_name, con=engine)
+    pd.testing.assert_frame_equal(test_df, result)
 
 @pytest.mark.parametrize("conn", all_connectable_iris)
 def test_read_iris_query(conn, request):
