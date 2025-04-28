@@ -30,7 +30,6 @@ from pandas import (
 
 from pandas.io.formats import printing
 import pandas.io.formats.format as fmt
-from pandas.errors import InvalidValueArgument
 
 def has_info_repr(df):
     r = repr(df)

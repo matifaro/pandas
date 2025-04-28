@@ -85,8 +85,6 @@ from pandas.io.common import (
 )
 from pandas.io.formats import printing
 
-from pandas.errors import InvalidValueArgument
-
 if TYPE_CHECKING:
     from pandas._typing import (
         ArrayLike,
