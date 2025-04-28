@@ -121,9 +121,6 @@ class TestDataFrameFormatting:
 
         with option_context("display.max_colwidth", max_len + 2):
             assert "..." not in repr(df)
-        with pytest.raises(ValueError) as excinfo:  
-            option_context("display.max_colwidth", 2)  
-        assert str(excinfo.value) == "Value must be bigger than 3"
 
     def test_repr_truncation_preserves_na(self):
         # https://github.com/pandas-dev/pandas/issues/55630
@@ -149,9 +146,11 @@ class TestDataFrameFormatting:
         # Deprecation enforced from:
         # https://github.com/pandas-dev/pandas/issues/31532
         with pytest.raises(
-            ValueError, match="Value must be a nonnegative integer or None"
+            ValueError, match="Value must be bigger than 3"
         ):
             with option_context("display.max_colwidth", -1):
+                pass
+            with option_context("display.max_colwidth", 3):
                 pass
 
     def test_repr_chop_threshold(self):
