@@ -909,9 +909,7 @@ def is_callable(obj: object) -> bool:
         raise ValueError("Value must be a callable")
     return True
 
-from pandas.errors import InvalidValueArgument
-
 def validate_max_colwidth(x: int | None) -> int | None:
     if x is not None and x < 4:
-        raise InvalidValueArgument
+        raise ValueError("Value must be bigger than 3")
     return x
