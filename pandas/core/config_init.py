@@ -26,6 +26,7 @@ from pandas._config.config import (
     is_one_of_factory,
     is_str,
     is_text,
+    validate_max_colwidth,
 )
 
 # compute
@@ -336,7 +337,7 @@ with cf.config_prefix("display"):
         "max_colwidth",
         50,
         max_colwidth_doc,
-        validator=is_nonnegative_int,
+        validator=validate_max_colwidth,
     )
     if is_terminal():
         max_cols = 0  # automatically determine optimal number of columns
