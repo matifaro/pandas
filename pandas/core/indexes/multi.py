@@ -2914,6 +2914,17 @@ class MultiIndex(Index):
         ci = Index(cat)
         return ci.get_indexer_for(target)
 
+    def searchsorted(self, key, side="left", sorter=None):
+        """
+        Find indices where elements should be inserted to maintain order.
+        For MultiIndex, delegate to get_indexer.
+        """
+        # get_indexer returns -1 for missing; convert to insertion point
+        idx = self.get_indexer([key])
+        # if not found, insertion point = len(self)
+        pos = idx[0]
+        return pos if pos >= 0 else len(self)
+
     def get_slice_bound(
         self,
         label: Hashable | Sequence[Hashable],

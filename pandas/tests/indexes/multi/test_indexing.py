@@ -1029,3 +1029,13 @@ def test_get_loc_namedtuple_behaves_like_tuple():
         assert idx.get_loc(("i1", "i2")) == 0
         assert idx.get_loc(("i3", "i4")) == 1
         assert idx.get_loc(("i5", "i6")) == 2
+
+def test_searchsorted_multiindex():
+    mi = MultiIndex(
+        levels=[[0, 1], ['a', 'b']],
+        codes=[[0, 0, 1], [0, 1, 0]]
+    )
+    # existing key
+    assert mi.searchsorted((1, 'a')) == 2
+    # new key insertion
+    assert mi.searchsorted((1, 'b')) == len(mi)
